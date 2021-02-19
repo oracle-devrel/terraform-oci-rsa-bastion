@@ -8,8 +8,9 @@ resource "oci_core_subnet" "bastion_subnet" {
   security_list_ids   = [oci_core_security_list.bastion_security_list.id]
   compartment_id      = var.compartment_ocid
   vcn_id              = var.vcn_id
-#   route_table_id      = var.route_table_id
-#   dhcp_options_id     = var.dhcp_options_id
+# Commented out to use the default route for the VCN
+# route_table_id      = var.route_table_id
+
   freeform_tags = {
     "Description" = "Bastion subnet"
     "Function"    = "Subnet for bastion resources"
@@ -64,7 +65,70 @@ resource "oci_core_security_list" "bastion_security_list" {
   }
 }
 
-output "subnet_id" {
-  value = oci_core_subnet.bastion_subnet.id
-  description = "Bastion subnet ID"
+# ---------------------------------------------------------------------------------------------------------------------
+# Create single bastion instance
+# ---------------------------------------------------------------------------------------------------------------------
+resource "oci_core_instance" "bastion" {
+  compartment_id                      = var.compartment_ocid
+  availability_domain                 = lookup(data.oci_identity_availability_domains.ad.availability_domains[0],"name")
+  shape                               = var.bastion_instance_shape
+  is_pv_encryption_in_transit_enabled = true
+  display_name                        = "bastion"
+
+  freeform_tags = {
+    "Description" = "Bastion host"
+    "Function"    = "Allows secure connections for admin work"
+  }
+
+  create_vnic_details {
+    assign_public_ip = true
+    display_name     = "bastion-vnic"
+    hostname_label   = "bastion"
+    subnet_id        = oci_core_subnet.bastion_subnet.id
+  }
+
+  metadata = {
+    ssh_authorized_keys = file (var.ssh_public_key_path)
+    user_data           = base64encode(data.template_file.bootstrap.rendered)
+  }
+
+  source_details {
+    source_type = "image"
+    source_id   = var.instance_image_ocid[var.region]
+  }
+
+  launch_options {
+    is_pv_encryption_in_transit_enabled = true
+    network_type                        = "PARAVIRTUALIZED"
+  }
+
+  timeouts {
+    create = "10m"
+  }
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Get a list of availability domains
+# ---------------------------------------------------------------------------------------------------------------------
+data "oci_identity_availability_domains" "ad" {
+  compartment_id = var.compartment_ocid
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bootstrap script and variables
+# ---------------------------------------------------------------------------------------------------------------------
+data "template_file" bootstrap {
+  template = file("${path.module}/userdata/bootstrap")
+
+  vars = {
+    vcn_cidr_block   = var.vcn_cidr_block
+    # Placeholder values for bootstrapping
+    # bootstrap_bucket = var.oci_caas_bootstrap_bucket
+    # bootstrap_bundle = var.oci_caas_bastion_bootstrap_bundle
+    # wazuh_server_ip  = var.wazuh_server_ip
+  }
+}
+
+data "oci_core_instance" "bastion_host" {
+  instance_id = oci_core_instance.bastion.id
 }
