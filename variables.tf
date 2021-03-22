@@ -214,13 +214,22 @@ variable "instance_image_ocid" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# Placeholder for bootstrapping
+# Bootstrapping setup
 # ---------------------------------------------------------------------------------------------------------------------
-# variable "oci_caas_bootstrap_bucket" {
-#   type        = string
-#   description = "Name of the bucket created during bootstrapping."
-# }
-# variable "oci_caas_bastion_bootstrap_bundle" {
-#   type        = string
-#   description = "File name for the bootstrap bundle."
-# }
+variable "bootstrap_bucket" {
+  type        = string
+  description = "Name of the bucket created during bootstrapping."
+  default     = "UNDEFINED"
+}
+
+variable "bastion_bootstrap_bundle" {
+  type        = string
+  description = "File name for the bootstrap bundle."
+  default     = "UNDEFINED"
+}
+
+variable "playbook_name" {
+  type        = string
+  description = "Playbook name for bastion"
+  default     = "oci-rsa-ansible-bastion"
+}
