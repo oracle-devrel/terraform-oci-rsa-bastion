@@ -121,11 +121,10 @@ data "template_file" bootstrap {
   template = file("${path.module}/userdata/bootstrap")
 
   vars = {
-    vcn_cidr_block   = var.vcn_cidr_block
-    # Placeholder values for bootstrapping
-    # bootstrap_bucket = var.oci_caas_bootstrap_bucket
-    # bootstrap_bundle = var.oci_caas_bastion_bootstrap_bundle
-    # wazuh_server_ip  = var.wazuh_server_ip
+    bootstrap_bucket = var.bootstrap_bucket
+    bootstrap_bundle = var.bastion_bootstrap_bundle
+    wazuh_server_ip  = var.wazuh_server_ip
+    playbook_name = var.playbook_name
   }
 }
 
