@@ -200,13 +200,13 @@ variable "ingress_security_rules_udp_options_source_port_range_min" {
 # Image setup
 # ---------------------------------------------------------------------------------------------------------------------
 variable "instance_image_id" {
-  description = "Provide a custom image id for the bastion host or leave as Autonomous."
+  description = "Provide an Oracle Autonomous Linux image id for bastion host."
   type        = string
   default     = "Autonomous"
 }
 
 variable "instance_operating_system_version" {
-  description = "In case Autonomous Linux is used, allow specification of Autonomous version"
+  description = "the version of Oracle Autonomous Linux"
   type        = string
   default     = "7.9"
 }
