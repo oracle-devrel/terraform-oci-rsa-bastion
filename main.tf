@@ -94,7 +94,7 @@ resource "oci_core_instance" "bastion" {
 
   source_details {
     source_type = "image"
-    source_id   = var.instance_image_ocid[var.region]
+    source_id   = data.oci_core_images.autonomous_images.images.0.id
   }
 
   launch_options {
@@ -105,29 +105,4 @@ resource "oci_core_instance" "bastion" {
   timeouts {
     create = "10m"
   }
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# Get a list of availability domains
-# ---------------------------------------------------------------------------------------------------------------------
-data "oci_identity_availability_domains" "ad" {
-  compartment_id = var.compartment_ocid
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# Bootstrap script and variables
-# ---------------------------------------------------------------------------------------------------------------------
-data "template_file" bootstrap {
-  template = file("${path.module}/userdata/bootstrap")
-
-  vars = {
-    bootstrap_bucket = var.bootstrap_bucket
-    bootstrap_bundle = var.bastion_bootstrap_bundle
-    wazuh_server_ip  = var.wazuh_server_ip
-    playbook_name = var.playbook_name
-  }
-}
-
-data "oci_core_instance" "bastion_host" {
-  instance_id = oci_core_instance.bastion.id
 }
