@@ -20,6 +20,13 @@ mkdir -p $PACKAGE_CACHE
 # ${bootstrap_bundle}
 # ${wazuh_server_ip}
 
+function write_passwords_to_yml {
+  cat << EOF > $OCI_RSA_BASE/extra-variables.yml
+  ansible_playbook_name: "${playbook_name}"
+  bucket_name: "${bootstrap_bucket}"
+EOF
+}
+
 # Temporarily disable SELinux - required for firewalld updates during user-data
 setenforce 0
 
@@ -31,6 +38,7 @@ else
   if [ $? -eq 0 ]
   then
     tar zxf $PACKAGE_CACHE/${bootstrap_bundle} -C $OCI_RSA_BASE
+    write_passwords_to_yml;
     export ANSIBLE_ROLES_PATH="$OCI_RSA_BASE/${playbook_name}/.galaxy"
     ansible-playbook -i localhost, $OCI_RSA_BASE/${playbook_name}/main.yml --connection=local
   fi
