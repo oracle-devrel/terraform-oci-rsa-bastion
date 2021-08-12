@@ -23,7 +23,6 @@ mkdir -p $PACKAGE_CACHE
 function write_passwords_to_yml {
   cat << EOF > $OCI_RSA_BASE/extra-variables.yml
   ansible_playbook_name: "${playbook_name}"
-  bucket_name: "${bootstrap_bucket}"
 EOF
 }
 
