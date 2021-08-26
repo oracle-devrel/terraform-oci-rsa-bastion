@@ -24,7 +24,6 @@ data "template_file" bootstrap {
 
   vars = {
     bootstrap_bucket = var.bootstrap_bucket
-    bootstrap_bundle = var.bastion_bootstrap_bundle
     wazuh_server_ip  = var.wazuh_server_ip
     playbook_name = var.playbook_name
   }
