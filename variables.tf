@@ -33,7 +33,7 @@ variable "vcn_cidr_block" {
 variable "bastion_cidr_block" {
   type        = string
   description = "[Bastion Subnet] CIDR Block - Should be within the VCN range"
-  default     = "10.0.1.0/27"
+  default     = "10.1.27.0/27"
 }
 
 variable "wazuh_tier_cidr_block" {
@@ -217,12 +217,6 @@ variable "instance_operating_system_version" {
 variable "bootstrap_bucket" {
   type        = string
   description = "Name of the bucket created during bootstrapping."
-  default     = "UNDEFINED"
-}
-
-variable "bastion_bootstrap_bundle" {
-  type        = string
-  description = "File name for the bootstrap bundle."
   default     = "UNDEFINED"
 }
 
