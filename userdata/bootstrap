@@ -18,6 +18,7 @@ mkdir -p $PACKAGE_CACHE
 
 # ${bootstrap_bucket}
 # ${wazuh_server_ip}
+# ${bootstrap_bundle}
 
 
 # Temporarily disable SELinux - required for firewalld updates during user-data

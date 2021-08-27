@@ -24,9 +24,9 @@ data "template_file" bootstrap {
 
   vars = {
     bootstrap_bucket = var.bootstrap_bucket
+    bootstrap_bundle = var.bastion_bootstrap_bundle
     wazuh_server_ip  = var.wazuh_server_ip
-    bootstrap_bundle = var.bootstrap_bundle
-    playbook_name = trimsuffix(var.bootstrap_bundle, ".tgz")
+    playbook_name    = trimsuffix(var.bootstrap_bundle, ".tgz")
   }
 }
 
