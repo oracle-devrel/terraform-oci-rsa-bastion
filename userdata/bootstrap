@@ -17,8 +17,9 @@ export PACKAGE_CACHE="$OCI_RSA_BASE/package_cache"
 mkdir -p $PACKAGE_CACHE
 
 # ${bootstrap_bucket}
-# ${wazuh_server_ip}
 # ${bootstrap_bundle}
+# ${wazuh_server_ip}
+
 
 
 # Temporarily disable SELinux - required for firewalld updates during user-data
