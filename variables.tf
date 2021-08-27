@@ -222,6 +222,6 @@ variable "bootstrap_bucket" {
 
 variable "bastion_bootstrap_bundle" {
   type        = string
-  description = "Bootstrap bundle name for bastion"
+  description = "File name for the bootstrap bundle."
   default     = "UNDEFINED"
 }
