@@ -20,8 +20,6 @@ mkdir -p $PACKAGE_CACHE
 # ${bootstrap_bundle}
 # ${wazuh_server_ip}
 
-
-
 # Temporarily disable SELinux - required for firewalld updates during user-data
 setenforce 0
 
