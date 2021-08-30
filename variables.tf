@@ -225,9 +225,3 @@ variable "bastion_bootstrap_bundle" {
   description = "File name for the bootstrap bundle."
   default     = "UNDEFINED"
 }
-
-variable "playbook_name" {
-  type        = string
-  description = "Playbook name for bastion"
-  default     = "oci-rsa-ansible-bastion"
-}
