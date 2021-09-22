@@ -1,4 +1,4 @@
-# OCI-RSA-TF-BASTION
+# TERRAFORM-OCI-RSA-BASTION
 This Terraform stack deploys a bastion host to an Oracle Cloud Infrastructure enviroment. 
 The stack uses the following OCI resources:
 - Compute
