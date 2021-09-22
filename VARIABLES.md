@@ -72,4 +72,4 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bastion_ip"></a> [bastion\_ip](#output\_bastion\_ip) | --------------------------------------------------------------------------------------------------------------------- Return the public bastion IP address --------------------------------------------------------------------------------------------------------------------- |
+| <a name="output_bastion_ip"></a> [bastion\_ip](#output\_bastion\_ip) | Return the public bastion IP address  |
