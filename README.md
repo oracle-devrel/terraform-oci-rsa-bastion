@@ -48,7 +48,7 @@ oci os object put -ns $namespace -bn $bucketname --file $playbook_zip --name ${p
 After Terraform provisions the instance, the bootstrapping script pulls the appropriate tar file from object store and runs the playbook.
 
 ## Usage
-If the bootstrapping variables are not set, Terraform will only provision the resources and not install the wazuh cluster through ansible. 
+If the bootstrapping variables are not set, Terraform will only provision the resources and not install the security tools, otp access, wazuh agent. 
 
 ### Bootstrapping Variables
 Define the following variables in order to deploy the Ansible playbooks during bootstrapping. The default value of these variables is `UNDEFINED`.
