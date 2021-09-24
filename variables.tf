@@ -33,13 +33,13 @@ variable "vcn_cidr_block" {
 variable "bastion_cidr_block" {
   type        = string
   description = "[Bastion Subnet] CIDR Block - Should be within the VCN range"
-  default     = "10.0.1.0/27"
+  default     = "10.1.1.0/27"
 }
 
 variable "wazuh_tier_cidr_block" {
   type        = string
   description = "[Wazuh] CIDR block - Used in firewall rules to access Wazuh"
-  default     = "10.0.1.32/27"
+  default     = "10.1.0.0/24"
 }
 
 variable "wazuh_server_ip" {
