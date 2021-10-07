@@ -7,7 +7,7 @@ The stack uses the following OCI resources:
 An existing vcn is required to deploy the stack.
 
 The stack is intended to be used in conjunction with the following ansible playbooks.
-- [oci-rsa-ansible-bastion](PLACEHOLDER)
+- [oci-rsa-ansible-bastion](https://github.com/oracle-quickstart/oci-rsa-ansible-bastion)
 
 If this playbook is not appropriately provided the stack will only provision the instances and not install the security and monitoring tools. Using the playbook allows for otp access to the bastion and automatic Wazuh agent registration.
 
